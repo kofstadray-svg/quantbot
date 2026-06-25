@@ -615,8 +615,9 @@ def api_options():
     try:
         from brokers.alpaca_options import get_options_positions
         positions = get_options_positions()
-    except Exception as e:
-        return jsonify({"error": str(e), "positions": []})
+    except Exception:
+        app.logger.exception("Failed to load options positions")
+        return jsonify({"error": "Failed to load options positions", "positions": []})
 
     out = []
     total_value = 0.0
