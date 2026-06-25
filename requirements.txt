@@ -1,0 +1,36 @@
+# ─── Core AI ───────────────────────────────────────────────────────────────
+anthropic>=0.25.0          # Claude API client
+
+# ─── Brokers & Market Data ─────────────────────────────────────────────────
+alpaca-py>=0.20.0          # Official Alpaca SDK (stocks, options, crypto)
+yfinance>=0.2.40           # Yahoo Finance — free historical price data
+                           # (see OPENBB_INTEGRATION.md). Pulls ~30 provider packages;
+                           # uses free providers by default (yfinance, federal_reserve, sec).
+
+# ─── Polymarket ────────────────────────────────────────────────────────────
+# Read-only integration via the public Gamma API in agents/polymarket.py (httpx).
+# py-clob-client + web3 were originally declared for transactional execution + ETH
+# wallet signing but never wired up. Removed 2026-06-16.
+
+# ─── Data & Quant ──────────────────────────────────────────────────────────
+pandas>=2.2.0
+numpy>=1.26.0
+scipy>=1.12.0              # Monte Carlo / statistics  (optional — numpy fallback built-in)
+ta>=0.11.0                 # Technical analysis indicators (RSI, MACD, BB, etc.)
+lxml>=5.0.0                # HTML parsing for pd.read_html (S&P 400/600 universe fetch)
+
+# ─── Async / HTTP ──────────────────────────────────────────────────────────
+httpx>=0.27.0
+requests>=2.31.0           # Used directly by universe / tradingview / webhook / scan_scheduler
+# tiingo_data.py uses requests directly -- no separate Tiingo SDK needed
+flask>=3.0.0               # Webhook server (TradingView → Alpaca bridge)
+python-telegram-bot>=20.0  # Telegram bot framework
+
+# ─── Config & Utils ────────────────────────────────────────────────────────
+python-dotenv>=1.0.0       # Load secrets from .env
+loguru>=0.7.2              # Clean structured logging
+schedule>=1.2.1            # Simple cron-style job scheduler
+
+# ─── Dev / Testing ─────────────────────────────────────────────────────────
+pytest>=8.0.0
+pytest-asyncio>=0.23.0

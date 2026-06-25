@@ -1,0 +1,66 @@
+# ─── Credentials & secrets ────────────────────────────────────────────────────
+.env
+*.pem
+*.key
+
+# ─── Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.Python
+
+# ─── Virtual environments ─────────────────────────────────────────────────────
+.venv/
+.venv-win/
+venv/
+env/
+ENV/
+
+# ─── Bot runtime files ────────────────────────────────────────────────────────
+logs/
+cache/
+data/exit_state.json
+*.jsonl
+*.db
+*.sqlite
+*.sqlite3
+
+# ─── Misc project files ───────────────────────────────────────────────────────
+.evn.txt
+Kindle.html
+Kindle_files/
+archive/
+
+# ─── Ruff / linting ───────────────────────────────────────────────────────────
+.ruff_cache/
+
+# ─── Pytest ───────────────────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ─── IDEs ─────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ─── Temporary scripts ────────────────────────────────────────────────────────
+_fix_*.py
+_check_*.py
+_clean_*.py
+_remove_*.py
+_revert_*.py
+_strip_*.py
+_cancel_*.py
+_audit.py
+_smoke.py
+_import_test.py

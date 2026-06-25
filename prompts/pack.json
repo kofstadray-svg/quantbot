@@ -1,0 +1,12 @@
+{
+  "pack": "default",
+  "version": "v1",
+  "description": "Regime-adaptive prompts: trend-following and mean-reversion strategies",
+  "default_template": "trend_following",
+  "default_version": "v1",
+  "regime_map": {
+    "trending":       {"template": "trend_following", "version": "v1"},
+    "mean_reverting": {"template": "mean_reversion",  "version": "v1"},
+    "choppy":         {"template": "mean_reversion",  "version": "v1"}
+  }
+}

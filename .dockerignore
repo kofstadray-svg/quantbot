@@ -1,0 +1,33 @@
+# Exclude everything that shouldn't go into the image
+
+# Virtual env (image builds its own)
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Credentials — always exclude; injected at runtime via .env / env_file
+.env
+
+# Logs (mounted as a volume)
+logs/
+
+# Git history
+.git/
+.gitignore
+
+# Editor / OS noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Backtesting outputs (not needed at runtime)
+backtesting/results/
+
+# Dev-only files
+*.log
+*.jsonl
