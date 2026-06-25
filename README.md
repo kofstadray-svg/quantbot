@@ -514,6 +514,8 @@ Key principles applied throughout:
 
 ## Disclaimer
 
+Im always open for ideas and suggestions.
+
 This software is for **educational and research purposes only**. It is not financial advice. Paper trading results do not guarantee live trading performance. Trading involves substantial risk of loss. Use at your own risk.
 
 The default configuration uses Alpaca **paper trading** which uses simulated money only. You must explicitly set `ENV=prod` and the live Alpaca endpoint to trade with real capital — do so only if you fully understand the risks.
