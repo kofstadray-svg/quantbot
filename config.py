@@ -167,8 +167,7 @@ def validate_config(*, die: bool = True) -> list[str]:
 
     errors = [m for m in msgs if m.startswith("ERROR")]
     if errors and die:
-        for m in msgs:
-            print(_redact_sensitive_values(m), file=sys.stderr)
+        print("ERROR: Invalid configuration detected. Review .env and startup diagnostics.", file=sys.stderr)
         sys.exit(1)
 
     return msgs
