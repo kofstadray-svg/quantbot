@@ -33,7 +33,11 @@ _CACHE_DIR.mkdir(exist_ok=True)
 def _path(key: str) -> Path:
     # sanitise key into a safe filename
     safe = "".join(c if c.isalnum() or c in "-_." else "_" for c in key)
-    return _CACHE_DIR / f"{safe}.json"
+    candidate = (_CACHE_DIR / f"{safe}.json").resolve()
+    root = _CACHE_DIR.resolve()
+    if root not in candidate.parents:
+        raise ValueError(f"unsafe cache key path: {key!r}")
+    return candidate
 
 
 def save(key: str, payload, label: str = "") -> None:
