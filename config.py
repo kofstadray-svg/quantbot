@@ -81,6 +81,22 @@ DAILY_LOSS_LIMIT_USD: float  = float(os.getenv("DAILY_LOSS_LIMIT_USD", "100"))
 
 # Validation
 
+def _redact_sensitive_values(message: str) -> str:
+    """Redact known sensitive config values before logging."""
+    redacted = message
+    sensitive_values = [
+        ANTHROPIC_API_KEY,
+        ALPACA_API_KEY,
+        ALPACA_SECRET_KEY,
+        WEBHOOK_SECRET,
+        MCP_AUTH_TOKEN,
+        TELEGRAM_BOT_TOKEN,
+    ]
+    for secret in sensitive_values:
+        if secret:
+            redacted = redacted.replace(secret, "***REDACTED***")
+    return redacted
+
 _REQUIRED: dict[str, str] = {
     "ANTHROPIC_API_KEY": ANTHROPIC_API_KEY,
     "ALPACA_API_KEY":    ALPACA_API_KEY,
@@ -152,7 +168,7 @@ def validate_config(*, die: bool = True) -> list[str]:
     errors = [m for m in msgs if m.startswith("ERROR")]
     if errors and die:
         for m in msgs:
-            print(m, file=sys.stderr)
+            print(_redact_sensitive_values(m), file=sys.stderr)
         sys.exit(1)
 
     return msgs
