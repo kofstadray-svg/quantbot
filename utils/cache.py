@@ -32,8 +32,16 @@ _CACHE_DIR.mkdir(exist_ok=True)
 
 def _path(key: str) -> Path:
     # sanitise key into a safe filename
-    safe = "".join(c if c.isalnum() or c in "-_." else "_" for c in key)
-    return _CACHE_DIR / f"{safe}.json"
+    safe = "".join(c if c.isalnum() or c in "-_." else "_" for c in key).strip("._")
+    if not safe:
+        safe = "cache_key"
+
+    candidate = _CACHE_DIR / f"{safe}.json"
+    cache_root = _CACHE_DIR.resolve()
+    resolved = candidate.resolve()
+    if resolved.parent != cache_root:
+        raise ValueError(f"Invalid cache key path: {key!r}")
+    return resolved
 
 
 def save(key: str, payload, label: str = "") -> None:
@@ -46,9 +54,10 @@ def save(key: str, payload, label: str = "") -> None:
             "saved_epoch": time.time(),
             "payload": payload,
         }
-        tmp = _path(key).with_suffix(".json.tmp")
+        dest = _path(key)
+        tmp = dest.with_suffix(".json.tmp")
         tmp.write_text(json.dumps(entry), encoding="utf-8")
-        os.replace(tmp, _path(key))   # atomic
+        os.replace(tmp, dest)   # atomic
     except Exception as e:
         logger.debug(f"cache.save({key}) failed (non-fatal): {e}")
 
